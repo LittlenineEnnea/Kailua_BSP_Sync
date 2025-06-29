@@ -19,18 +19,20 @@ mkdir -p "$download_dir"
 
 # Declaration of versions using associative arrays
 declare -A versions=(
-    [audio]="AU_TECHPACK_AUDIO.LA.8.0.R1.00.00.00.000.121"
-    [camera]="AU_TECHPACK_CAMERA.LA.3.0.R1.00.00.00.000.104"
-    [cv]="AU_TECHPACK_CV.LA.1.0.R1.00.00.00.000.053"
-    [display]="AU_TECHPACK_DISPLAY.LA.3.0.R1.00.00.00.000.127"
-    [graphics]="AU_TECHPACK_GRAPHICS.LA.1.0.R1.00.00.00.000.093"
-    [kernelplatform]="AU_LINUX_KERNEL.PLATFORM.2.0.R1.00.00.00.004.194"
+    [audio]="AU_TECHPACK_AUDIO.LA.8.0.R1.00.00.00.000.096"
+    [camera]="AU_TECHPACK_CAMERA.LA.3.0.R1.00.00.00.000.083"
+    [cv]="AU_TECHPACK_CV.LA.1.0.R1.00.00.00.000.040"
+    [display]="AU_TECHPACK_DISPLAY.LA.3.0.R1.00.00.00.000.112"
+    [graphics]="AU_TECHPACK_GRAPHICS.LA.1.0.R1.00.00.00.000.071"
+    [kernelplatform]="AU_LINUX_KERNEL.PLATFORM.2.0.R1.00.00.00.004.152"
+    [sensor]="AU_TECHPACK_SENSORS.LA.3.0.R1.00.00.00.000.042"
     [qssi_system]="AU_LINUX_ANDROID_LA.QSSI.15.0.R1.11.00.00.1136.120.00"
-    [system]="AU_LINUX_ANDROID_LA.QSSI.13.0.R1.13.00.00.913.147.00"
-    [vendor]="AU_LINUX_ANDROID_LA.VENDOR.13.2.0.R1.11.00.00.925.259"
-    [le]="AU_LINUX_EMBEDDED_LE.UM.6.3.3.R1_TARGET_ALL.01.427.242"
-    [video]="AU_TECHPACK_VIDEO.LA.3.0.R1.00.00.00.000.092"
-    [def_system]="default_LA.QSSI.13.0.r1-14700-qssi.0"
+    [system]="AU_LINUX_ANDROID_LA.QSSI.13.0.R1.13.00.00.913.122.00"
+    [vendor]="AU_LINUX_ANDROID_LA.VENDOR.13.2.4.R1.11.00.00.1084.028"
+    [le]="LE.UM.6.3.3.r1-20400-genericarmv8-64.0"
+    [video]="AU_TECHPACK_VIDEO.LA.3.0.R1.00.00.00.000.070"
+    [xr]="AU_TECHPACK_XR.LA.1.0.R1.00.00.00.000.043"
+    [def_system]="default_LA.QSSI.13.0.r1-12200-qssi.0"
 )
 
 # Loop through each tech pack and process accordingly
