@@ -1,22 +1,11 @@
 #!/usr/bin/env bash
-
 # Base URL for the git repository containing the tech packs
 base_url="https://git.codelinaro.org/clo"
 # Directory where downloaded XML files will be stored
 download_dir="clo"
-
-# Check if necessary commands are installed
-for cmd in wget xmlstarlet; do
-    command -v "$cmd" &> /dev/null || {
-        echo "Error: $cmd is not installed. Please install and retry." >&2
-        exit 1
-    }
-done
-
 # Re-gerenate the download directory
 rm -rf "$download_dir"
 mkdir -p "$download_dir"
-
 # Declaration of versions using associative arrays
 declare -A versions=(
     [audio]="AU_TECHPACK_AUDIO.LA.8.0.R1.00.00.00.000.096"
@@ -34,7 +23,6 @@ declare -A versions=(
     [xr]="AU_TECHPACK_XR.LA.1.0.R1.00.00.00.000.043"
     [def_system]="default_LA.QSSI.13.0.r1-12200-qssi.0"
 )
-
 # Loop through each tech pack and process accordingly
 for key in "${!versions[@]}"; do
     filename="${versions[$key]}.xml"
@@ -61,7 +49,6 @@ for key in "${!versions[@]}"; do
             url="$base_url/la/la/system/manifest/-/raw/release/$filename"
             ;;
     esac
-
     # Download the file if it does not already exist
     if [ ! -f "$file_path" ]; then
         echo "Downloading $file_path from $url"
@@ -70,10 +57,8 @@ for key in "${!versions[@]}"; do
             continue
         }
     fi
-
     # Remove unnecessary elements from the downloaded XML files
     xmlstarlet ed -L -d "//remote | //default | //refs" "$file_path"
-
     # Apply XML modifications only for kernelplatform
     if [ "$key" == "kernelplatform" ]; then
         xmlstarlet ed -L \
@@ -85,7 +70,6 @@ for key in "${!versions[@]}"; do
             -i "/manifest/project[contains(@name, 'prebuilts')]" -t attr -n "clone-depth" -v "1" \
             "$file_path"
     fi
-
     # Apply XML modifications only for system
     if [ "$key" == "def_system" ]; then
         project_names=$(xmlstarlet sel -t -m "//project[@clone-depth='1']" -v "@name" -n "$file_path")
@@ -100,9 +84,7 @@ for key in "${!versions[@]}"; do
                 -s "/manifest/project[@name='$name']" -t attr -n "clone-depth" -v "1" \
                 "$download_dir/system.xml"
         done
-
         rm -rf "$file_path"
     fi
 done
-
 echo "Setting up manifest completed successfully."
